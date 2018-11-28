@@ -65,30 +65,6 @@ class DefinedRanges extends Component {
             );
           })}
         </div>
-        <div className={styles.inputRanges}>
-          {this.props.inputRanges.map((rangeOption, i) => (
-            <div className={styles.inputRange} key={i}>
-              <input
-                className={styles.inputRangeInput}
-                onFocus={() => this.setState({ focusedInput: i, rangeOffset: 0 })}
-                onBlur={() => this.setState({ rangeOffset: 0 })}
-                onChange={e => {
-                  let value = parseInt(e.target.value, 10);
-                  value = isNaN(value) ? 0 : Math.max(Math.min(99999, value), 0);
-                  this.handleRangeChange(rangeOption.range(value, this.props));
-                }}
-                min={0}
-                max={99999}
-                value={
-                  rangeOption.getCurrentValue
-                    ? rangeOption.getCurrentValue(ranges[this.props.focusedRange[0]] || {})
-                    : '-'
-                }
-              />
-              <span className={styles.inputRangeLabel}>{rangeOption.label}</span>
-            </div>
-          ))}
-        </div>
         {this.props.footerContent}
       </div>
     );
